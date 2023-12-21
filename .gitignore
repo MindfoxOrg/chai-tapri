@@ -1,3 +1,9 @@
+# node js
+node-modules
+build
+.vscode
+.env
+
 # Compiled class file
 *.class
 
