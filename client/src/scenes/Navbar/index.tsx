@@ -24,7 +24,7 @@ const Navbar = (props: Props) => {
             <FlexBetween gap="2rem">
                 <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
                     <Link to='/' onClick={() => setSelected("signin")}
-                        style={{
+                        style={{ fontSize:"16px", fontWeight:"bold",
                             color: selected === "signin" ? "inherit" :
                                 palette.grey[700], textDecoration: "inherit"
                         }}>
@@ -35,7 +35,7 @@ const Navbar = (props: Props) => {
                 <Box>
                     <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
                         <Link to='/signup' onClick={() => setSelected("signup")}
-                            style={{
+                            style={{fontSize:"16px", fontWeight:"bold",
                                 color: selected === "signup" ? "inherit" :
                                     palette.grey[700], textDecoration: "inherit"
                             }}>

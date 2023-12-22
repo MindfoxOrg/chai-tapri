@@ -5,6 +5,7 @@ const FlexCenter = styled(Box)({
     display: "flex",
     justifyContent:"center",
     alignItems:"center",
+    padding:"1rem"
 })
 
 export default FlexCenter;
