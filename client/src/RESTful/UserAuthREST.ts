@@ -15,8 +15,7 @@ export async function signup(userData: UserSignUp){
     const response = await axios.post(import.meta.env.VITE_BASE_URL + `/signup`, requestBody);
 
     // Extract 'Authkey' token from response headers
-    var authKey : string = response.headers['authkey'];
-    console.log(`Authkey: ${authKey}`);
+    const authKey : string = response.headers['authkey'];
 
     // Return an object of type Auth
     const authData: Auth = {
