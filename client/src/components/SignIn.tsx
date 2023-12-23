@@ -59,7 +59,7 @@ const SignIn = () => {
                 <Button type='submit' variant="contained" style={{ ...btnstyle, backgroundColor: avatarStyle.backgroundColor }} fullWidth>
                     <Typography variant="h4" style={{ color: '#000' }}>Sign in</Typography>
                 </Button>
-                <Typography > Do you have an account ?
+                <Typography > Don't have an account ?
                     <Link to="/signup" >
                         Sign Up
                     </Link>
