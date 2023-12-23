@@ -16,6 +16,13 @@ const FormBox = () => {
     }
     const avatarStyle = { backgroundColor: palette.secondary[500].toString() }
     const btnstyle = { margin: '8px 0' }
+
+    const textFieldStyle = {
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: avatarStyle.backgroundColor,
+        },
+    };
+
     return (
         <FlexCenter>
             <Paper elevation={10} style={paperStyle}>
@@ -23,10 +30,23 @@ const FormBox = () => {
                     <Avatar style={avatarStyle}><CoffeeIcon /></Avatar>
                     <h2>Sign In</h2>
                 </Grid>
-                <TextField label='Username' placeholder='Enter username' fullWidth required />
+                <TextField
+                    label='Username'
+                    placeholder='Enter username'
+                    fullWidth
+                    required
+                    sx={textFieldStyle} // Apply the custom styling here
+                />
                 <br />
                 <br />
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth required />
+                <TextField
+                    label='Password'
+                    placeholder='Enter password'
+                    type='password'
+                    fullWidth
+                    required
+                    sx={textFieldStyle}
+                />
                 <FormControlLabel
                     control={
                         <Checkbox
@@ -40,7 +60,7 @@ const FormBox = () => {
                     <Typography variant="h4" style={{ color: '#000' }}>Sign in</Typography>
                 </Button>
                 <Typography > Do you have an account ?
-                    <Link href="#" >
+                    <Link to="/signup" >
                         Sign Up
                     </Link>
                 </Typography>
@@ -49,4 +69,4 @@ const FormBox = () => {
     )
 }
 
-export default FormBox
+export default FormBox;
