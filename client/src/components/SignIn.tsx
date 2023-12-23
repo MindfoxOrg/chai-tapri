@@ -4,11 +4,11 @@ import {
     Paper,
     TextField, Typography, useTheme
 } from '@mui/material'
-import FlexCenter from './FlexCenter';
+import FlexCenter from './util/FlexCenter';
 import CoffeeIcon from '@mui/icons-material/Coffee';
 import { Link } from 'react-router-dom';
 
-const FormBox = () => {
+const SignIn = () => {
     const { palette } = useTheme();
     const paperStyle = {
         padding: 20, height: '55vh', width: 280, margin: "20px auto",
@@ -69,4 +69,4 @@ const FormBox = () => {
     )
 }
 
-export default FormBox;
+export default SignIn;

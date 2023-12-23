@@ -1,9 +1,9 @@
-import FlexBetween from "@/components/FlexBetween";
+import FlexBetween from "@/components/util/FlexBetween";
 import CoffeeIcon from '@mui/icons-material/Coffee';
 
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import { useState } from 'react';
-import { useTheme, Typography, Box } from "@mui/material";
+import { useTheme, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 type Props = {}
 
@@ -15,9 +15,15 @@ const Navbar = (props: Props) => {
             {/* LEFT SIDE */}
             <FlexBetween gap="0.75rem">
                 <ConnectWithoutContactIcon sx={{ fontSize: "28px" }} />
-                <Typography variant="h4" fontSize="16px">
-                    tapri & chai
-                </Typography>
+                <Box sx={{ "&:hover": { color: palette.grey[300] } }}>
+                    <Link to='/' onClick={() => setSelected("signin")}
+                        style={{ fontSize:"16px", fontWeight:"bold",
+                            color: 
+                                palette.grey[100], textDecoration: "inherit"
+                        }}>
+                        tapri & chai
+                    </Link>
+                </Box>
                 <CoffeeIcon/>
             </FlexBetween>
             {/* RIGHT SIDE */}
@@ -29,7 +35,6 @@ const Navbar = (props: Props) => {
                                 palette.grey[700], textDecoration: "inherit"
                         }}>
                         Sign In
-
                     </Link>
                 </Box>
                 <Box>
