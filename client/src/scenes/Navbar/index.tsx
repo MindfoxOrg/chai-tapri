@@ -1,56 +1,70 @@
-import FlexBetween from "@/components/util/FlexBetween";
-import CoffeeIcon from '@mui/icons-material/Coffee';
 
-import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTheme, Box } from "@mui/material";
-import { Link } from "react-router-dom";
-type Props = {}
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import CoffeeIcon from '@mui/icons-material/Coffee';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Link, useNavigate } from "react-router-dom";
+import { removeBearer, removeEmail, selectUserEmail} from "@/store/features/auth/authSlice";
+import FlexBetween from "@/components/util/FlexBetween";
 
-const Navbar = (props: Props) => {
-    const { palette } = useTheme();
-    const [selected, setSelected] = useState("dashboard");
-    return (
-        <FlexBetween mb="0.25rem" p="0.5rem 0 rem" color={palette.grey[300]}>
-            {/* LEFT SIDE */}
-            <FlexBetween gap="0.75rem">
-                <ConnectWithoutContactIcon sx={{ fontSize: "28px" }} />
-                <Box sx={{ "&:hover": { color: palette.grey[300] } }}>
-                    <Link to='/' onClick={() => setSelected("signin")}
-                        style={{ fontSize:"16px", fontWeight:"bold",
-                            color: 
-                                palette.grey[100], textDecoration: "inherit"
-                        }}>
-                        tapri & chai
-                    </Link>
-                </Box>
-                <CoffeeIcon/>
-            </FlexBetween>
-            {/* RIGHT SIDE */}
-            <FlexBetween gap="2rem">
-                <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
-                    <Link to='/' onClick={() => setSelected("signin")}
-                        style={{ fontSize:"16px", fontWeight:"bold",
-                            color: selected === "signin" ? "inherit" :
-                                palette.grey[700], textDecoration: "inherit"
-                        }}>
-                        Sign In
-                    </Link>
-                </Box>
-                <Box>
-                    <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
-                        <Link to='/signup' onClick={() => setSelected("signup")}
-                            style={{fontSize:"16px", fontWeight:"bold",
-                                color: selected === "signup" ? "inherit" :
-                                    palette.grey[700], textDecoration: "inherit"
-                            }}>
-                            Sign Up
-                        </Link>
-                    </Box>
-                </Box> 
-            </FlexBetween>
+const Navbar = () => {
+  const { palette } = useTheme();
+  const userEmail = useSelector(selectUserEmail);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSettingsIconClick = () => {
+    // Add logic for Psychology icon click
+    console.log('Settings icon clicked');
+  };
+
+  const handleLogoutIconClick = () => {
+    // localStorage.clear();
+
+    dispatch(removeBearer());
+    dispatch(removeEmail());
+    navigate("");    
+  };
+
+  return (
+    <FlexBetween mb="0.25rem" p="0.5rem 0 rem" color={palette.grey[300]}>
+      {/* LEFT SIDE */}
+      <FlexBetween gap="0.75rem">
+        <ConnectWithoutContactIcon sx={{ fontSize: "28px" }} />
+        <Box sx={{ "&:hover": { color: palette.grey[300] } }}>
+          <Link to='/' style={{ fontSize: "16px", fontWeight: "bold", color: palette.grey[100], textDecoration: "inherit" }}>
+            tapri & chai
+          </Link>
+        </Box>
+        <CoffeeIcon />
+      </FlexBetween>
+
+      {/* RIGHT SIDE */}
+      {userEmail ? (
+        <FlexBetween gap="1rem">
+          <SettingsIcon sx={{ fontSize: "28px", cursor: 'pointer' }} onClick={handleSettingsIconClick} />
+          <LogoutIcon sx={{ fontSize: "28px", cursor: 'pointer' }} onClick={handleLogoutIconClick} />
         </FlexBetween>
-    )
-}
+      ) : (
+        <FlexBetween gap="2rem">
+          <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+            <Link to='' style={{ fontSize: "16px", fontWeight: "bold", color: palette.grey[700], textDecoration: "inherit" }}>
+              Sign In
+            </Link>
+          </Box>
+          <Box>
+            <Box sx={{ "&:hover": { color: palette.primary[100] } }}>
+              <Link to='/signup' style={{ fontSize: "16px", fontWeight: "bold", color: palette.grey[700], textDecoration: "inherit" }}>
+                Sign Up
+              </Link>
+            </Box>
+          </Box>
+        </FlexBetween>
+      )}
+    </FlexBetween>
+  );
+};
 
-export default Navbar
+export default Navbar;

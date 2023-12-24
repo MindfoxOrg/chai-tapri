@@ -6,11 +6,11 @@ import {
   } from '@mui/material'
   import FlexCenter from './util/FlexCenter';
   import CoffeeIcon from '@mui/icons-material/Coffee';
-  import { Link } from 'react-router-dom';
+  import { Link, useNavigate } from 'react-router-dom';
   import { useState } from 'react';
   import { useDispatch } from 'react-redux';
   import { signin } from '@/RESTful/UserAuthREST';
-  import { setBearer, setIsLoggedIn, setEmail as setReduxEmail } from '@/store/features/auth/authSlice'; // Renamed the imported setEmail
+  import { setBearer, setEmail as setReduxEmail } from '@/store/features/auth/authSlice'; // Renamed the imported setEmail
   
   const SignIn = () => {
     const { palette } = useTheme();
@@ -26,7 +26,7 @@ import {
         borderColor: avatarStyle.backgroundColor,
       },
     };
-  
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setLocalEmail] = useState(''); // Renamed to setLocalEmail
     const [password, setPassword] = useState('');
@@ -42,14 +42,13 @@ import {
           email,
           password,
         });
-        // Dispatch actions to update Redux store
-        if(authData.email) {
-            dispatch(setIsLoggedIn(true));
-        }
         
-        dispatch(setBearer(authData.bearer));
-        dispatch(setReduxEmail(authData.email)); // Use the imported setReduxEmail
-    
+        localStorage.setItem('authKey', authData.bearer);
+        localStorage.setItem('userEmail', authData.email);
+        
+        dispatch(setBearer(localStorage.getItem('authKey')));
+        dispatch(setReduxEmail(localStorage.getItem('userEmail'))); // Use the imported setReduxEmail
+        navigate('/home')
         // Optionally, you can perform additional actions or navigate to another page
       } catch (error) {
         // Handle signin errors

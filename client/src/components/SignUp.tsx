@@ -6,12 +6,12 @@ import {
   } from '@mui/material'
   import FlexCenter from './util/FlexCenter';
   import CoffeeIcon from '@mui/icons-material/Coffee';
-  import { Link } from 'react-router-dom';
+  import { Link, useNavigate } from 'react-router-dom';
   import { DatePicker } from '@mui/x-date-pickers';
   import { useDispatch } from 'react-redux';
   import { useState } from 'react';
   import { signup } from '@/RESTful/UserAuthREST';
-  import { setBearer, setEmail, setIsLoggedIn } from '@/store/features/auth/authSlice';
+  import { setBearer, setEmail} from '@/store/features/auth/authSlice';
   
   const SignUp = () => {
     const { palette } = useTheme();
@@ -38,6 +38,8 @@ import {
     const handlePasswordValidation = () => {
       return password === vPassword;
     }
+    
+    const navigate = useNavigate();
   
     const handleSignup = async () => {
       try {
@@ -49,14 +51,13 @@ import {
           phoneNumber,
           birthDate,
         });
-  
-        // Dispatch actions to update Redux store
-        if(authData.email) {
-          dispatch(setIsLoggedIn(true));
-      }
-        dispatch(setBearer(authData.bearer));
-        dispatch(setEmail(authData.email));
-  
+      localStorage.setItem('authKey', authData.bearer);
+      localStorage.setItem('userEmail', authData.email);
+      
+      dispatch(setBearer(localStorage.getItem('authKey')));
+      dispatch(setEmail(localStorage.getItem('userEmail'))); 
+
+        navigate('/home');
         // Optionally, you can perform additional actions or navigate to another page
       } catch (error) {
         // Handle signup errors

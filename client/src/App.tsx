@@ -23,9 +23,9 @@ function App() {
               <Box width="100%" height="100%" padding="1rem 2rem 4rem">
                 <Navbar />
                 <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<SignIn />} />
+                  <Route path="" element={<SignIn />} />
                   <Route path="/signUp" element={<SignUp />} />
+                  <Route path="/home" element={<Home />} />
                 </Routes>
               </Box>
             </ThemeProvider>

@@ -4,10 +4,9 @@ import { signup, signin } from '@/RESTful/UserAuthREST';
 
 // Define the initial state
 const initialState = {
-  auth: { bearer: '', email: '' },
+  auth: { bearer: localStorage.getItem('authKey'), email: localStorage.getItem('userEmail') },
   status: 'idle',
-  error: null,
-  isLoggedIn: false
+  error: null
 };
 
 // Create async thunks for fetching user sign-up and sign-in responses
@@ -44,18 +43,14 @@ export const authSlice = createSlice({
     setEmail: (state, action) => {
       state.auth.email = action.payload;
     },
-    setIsLoggedIn: (state, action) => {
-      state.isLoggedIn = action.payload ? true : false;
-    },
     removeBearer: (state) => {
+      localStorage.clear();
       state.auth.bearer = '';
     },
     removeEmail: (state) => {
+      localStorage.clear();
       state.auth.email = '';
     },
-    removeIsLoggedIn: (state) => {
-      state.isLoggedIn = false;
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -64,7 +59,11 @@ export const authSlice = createSlice({
       })
       .addCase(fetchUserSignUpResponse.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.auth = action.payload;
+        state.auth = {
+          bearer: action.payload.bearer,
+          email: action.payload.email,
+          
+        }
       })
       .addCase(fetchUserSignUpResponse.rejected, (state : any, action) => {
         state.status = 'failed';
@@ -75,7 +74,10 @@ export const authSlice = createSlice({
       })
       .addCase(fetchUserSignInResponse.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.auth = action.payload;
+        state.auth = {
+          bearer: action.payload.bearer,
+          email: action.payload.email,
+        }
       })
       .addCase(fetchUserSignInResponse.rejected, (state : any, action) => {
         state.status = 'failed';
@@ -85,8 +87,9 @@ export const authSlice = createSlice({
 });
 
 // Export the actions and selectors, including the async thunks
-export const { setBearer, setEmail, setIsLoggedIn, removeIsLoggedIn, removeBearer, removeEmail } = authSlice.actions;
-export const selectAuth = (state : any) => state.auth.auth;
+export const { setBearer, setEmail, removeBearer, removeEmail } = authSlice.actions;
+export const selectAuth = (state : any) => state.auth;
+export const selectUserEmail =(state : any) => state.auth.email;
 
 // Export the reducer
 export default authSlice.reducer;
