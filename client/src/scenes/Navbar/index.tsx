@@ -21,8 +21,6 @@ const Navbar = () => {
   };
 
   const handleLogoutIconClick = () => {
-    // localStorage.clear();
-
     dispatch(removeBearer());
     dispatch(removeEmail());
     navigate("");    
@@ -64,6 +62,7 @@ const Navbar = () => {
         </FlexBetween>
       )}
     </FlexBetween>
+    
   );
 };
 

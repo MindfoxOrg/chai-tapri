@@ -9,6 +9,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import Footer from './scenes/Footer';
 
 function App() {
   const theme = useMemo(() => createTheme(themeSettings), []);
@@ -27,6 +28,7 @@ function App() {
                   <Route path="/signUp" element={<SignUp />} />
                   <Route path="/home" element={<Home />} />
                 </Routes>
+                <Footer />
               </Box>
             </ThemeProvider>
           </LocalizationProvider>
