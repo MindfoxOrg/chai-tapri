@@ -19,9 +19,10 @@ export async function signup(userData: UserSignUp){
 
     // Return an object of type Auth
     const authData: Auth = {
-      email: userData.email,
+      email: response.data.email,
       bearer: authKey
     };
+    console.log(authData);
     return authData;
   } catch (error) {
     // Handle errors
@@ -29,4 +30,29 @@ export async function signup(userData: UserSignUp){
     throw error; // Rethrow the error for the caller to handle if needed
   }
 }
+
+  export async function signin(loginData: LoginData) {
+    const requestBody = {
+      email: loginData.email,
+      password: loginData.password,
+    }
+
+    try{
+    // Make a POST request using Axios
+    const response = await axios.post(import.meta.env.VITE_BASE_URL + `/login`, requestBody);
+    // Extract 'Authkey' token from response headers
+    const authKey : string = response.headers['authkey'];
+    const authData: Auth = {
+      email: response.data.email,
+      bearer: authKey
+    };
+    console.log(authData);
+    return authData;
+  } catch (error) {
+    // Handle errors
+    console.error('Error during signin:', error);
+    throw error; // Rethrow the error for the caller to handle if needed
+  }
+  }
+
 

@@ -11,7 +11,7 @@ import {
   import { useDispatch } from 'react-redux';
   import { useState } from 'react';
   import { signup } from '@/RESTful/UserAuthREST';
-  import { setBearer, setEmail } from '@/store/features/auth/authSlice';
+  import { setBearer, setEmail, setIsLoggedIn } from '@/store/features/auth/authSlice';
   
   const SignUp = () => {
     const { palette } = useTheme();
@@ -51,6 +51,9 @@ import {
         });
   
         // Dispatch actions to update Redux store
+        if(authData.email) {
+          dispatch(setIsLoggedIn(true));
+      }
         dispatch(setBearer(authData.bearer));
         dispatch(setEmail(authData.email));
   
