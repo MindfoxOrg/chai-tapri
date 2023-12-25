@@ -143,10 +143,10 @@ import {
             style={{ ...btnstyle, backgroundColor: avatarStyle.backgroundColor }}
             fullWidth
           >
-            <Typography variant="h4" style={{ color: '#000' }}>Sign in</Typography>
+            <Typography variant="h4" style={{ color: '#000' }}>Sign Up</Typography>
           </Button>
           <Typography > Do you have an account ?
-            <Link to="/signin" >
+            <Link to="/" >
               Sign In
             </Link>
           </Typography>

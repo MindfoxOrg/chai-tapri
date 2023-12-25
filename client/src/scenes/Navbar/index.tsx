@@ -23,7 +23,7 @@ const Navbar = () => {
   const handleLogoutIconClick = () => {
     dispatch(removeBearer());
     dispatch(removeEmail());
-    navigate("");    
+    navigate("/");    
   };
 
   return (
