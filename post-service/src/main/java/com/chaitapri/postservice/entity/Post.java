@@ -52,18 +52,11 @@ public class Post {
         @Column(name="post_created_at")
         private LocalDateTime date;
 
-        //        @MapKeyColumn(name="user_id")
-//
-//
-//
-//        @ElementCollection
-//        @CollectionTable(name = "post_comments" , joinColumns = @JoinColumn(name = "post_id"))
         @Transient
         @JsonProperty("post_comments")
         private List<Comment> comments = new ArrayList<>();
 
 
-        //This constructor is only for testing purpose
 
 
 
